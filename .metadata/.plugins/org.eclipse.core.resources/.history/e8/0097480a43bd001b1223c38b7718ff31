@@ -1,0 +1,98 @@
+package Gui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+//import TruongHuuLong.DrawUtils;
+import TruongHuuLong.Game;
+
+public class MainMenuPanel extends GuiPanel {
+
+		//private Font titleFont = Game.main.deriveFont(100f);
+		private Font creatorFont = Game.main.deriveFont(24f);
+		//private String title = "";
+		//private String creator = "By TruongHuuLong";
+		private int buttonWidth = 220;
+		private int buttonHeight = 60;
+		private int spacing = 90;
+		
+		
+		
+		public MainMenuPanel() {
+			super();
+			GuiButton playButton = new GuiButton(20,160,buttonWidth,buttonHeight);
+			GuiButton scoresButton = new GuiButton(20 ,playButton.getY()+spacing,buttonWidth,buttonHeight);
+			GuiButton quitButton = new GuiButton(20,scoresButton.getY()+spacing,buttonWidth,buttonHeight);
+			
+			playButton.setText("Play");
+			scoresButton.setText("Scores");
+			quitButton.setText("Quit");
+		
+			
+			playButton.addActionListener(new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GuiScreen.getInstance().setCurrentPanel("Play");		
+				}
+			});
+			
+			scoresButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GuiScreen.getInstance().setCurrentPanel("LeaderBoards");	
+				}		
+			});
+			
+			quitButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.exit(0);
+				}
+			});
+			
+			add(playButton);
+			add(scoresButton);
+			add(quitButton);
+			
+		}
+		
+		 @Override
+		public void render(Graphics2D g) {
+			 //
+		Toolkit t=Toolkit.getDefaultToolkit();  
+		Image i=t.getImage("screen1.png"); 
+		g.drawImage(i,0,0,Game.WIDTH,Game.HEIGHT,null);
+		    //
+		super.render(g);
+		
+		//g.setFont(titleFont);
+		//g.setColor(Color.black);
+		//g.drawString(title,Game.WIDTH/2 - DrawUtils.getMessageWitdth(title, titleFont, g)/2, 150);
+		
+		//Thanh vien nhom
+		g.setFont(creatorFont);
+		g.setColor(new Color(0xFF6699));
+		g.drawString("~[Thành Viên Nhóm]~", 590,200);
+		g.drawString("Trương Hữu Long", 600,240);
+		g.drawString("Nguyễn Minh Trường", 600,280);
+		g.drawString("Trần Minh Phúc", 600,320);
+		//
+		
+		//g.setFont(creatorFont);
+		//g.setColor(new Color(0xFF6699));
+		//g.drawString(creator,20,Game.HEIGHT-10);
+		
+		//
+		
+		
+        
+        //
+        
+		}
+}
